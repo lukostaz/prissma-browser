@@ -5,24 +5,63 @@
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
 @prefix ao:      <http://purl.org/ontology/ao/core#> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio: <http://purl.org/vocab/bio/0.1/>.
+@prefix ex: <http://custom-vocab.example.org/v1#>.
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix fresnel:  <http://www.w3.org/2004/09/fresnel#> .
 
-:ctx0
+
+
+:prism2 a prissma:Prism ;
+		a fresnel:Group ;
+	  fresnel:stylesheetLink <http://www-sop.inria.fr/members/Luca.Costabello/foaf-prissma.css>;
+      fresnel:purpose :ctx2 .
+	  
+:testlens a fresnel:Lens;
+	fresnel:group :prism2;
+	fresnel:classLensDomain foaf:Person;
+	fresnel:showProperties ( foaf:name 
+							 bio:employer
+                      	     foaf:currentProject 
+							 ex:publication) .
+	
+							 
+:nameFormat a fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:name ;
+            fresnel:label " "^^xsd:string ;
+            fresnel:valueStyle "name-value"^^fresnel:styleClass ;
+			fresnel:group :prism2 .
+	  
+:projectFormat a fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:currentProject ;
+            fresnel:label "Current Projects"^^xsd:string ;
+			fresnel:labelStyle "label"^^fresnel:styleClass ;
+            fresnel:valueStyle "value"^^fresnel:styleClass ;
+			fresnel:group :prism2 .
+:employerFormat a fresnel:Format ;
+            fresnel:propertyFormatDomain bio:employer ;
+            fresnel:label "Employer "^^xsd:string ;
+			fresnel:labelStyle "label"^^fresnel:styleClass ;
+            fresnel:valueStyle "value"^^fresnel:styleClass ;
+			fresnel:group :prism2 .
+:publicationFormat a fresnel:Format ;
+            fresnel:propertyFormatDomain ex:publication ;
+            fresnel:label "Publications "^^xsd:string ;
+			fresnel:labelStyle "label"^^fresnel:styleClass ;
+            fresnel:valueStyle "value"^^fresnel:styleClass ;
+			fresnel:group :prism2 .
+
+
+:ctx2
       a       prissma:Context ;
-      prissma:environment :env0 ;
-      prissma:user :usr0 .
+      prissma:environment :env2 ;
+      prissma:user :usr2 .
 
-:env0
-      a       prissma:Environment ;
-      prissma:nearbyEntity
-              <http://anthony-2351.example.org> , <http://brigitte-4128.example.org> ,
-			   <http://charlotte-3232.example.org> ,  <http://rupert-2128.example.org> .
-
-:usr0
+:usr2
       a       prissma:User ;
-      foaf:interest "fishing", "football", "baseball", "cinema", "computers" .
+      foaf:interest "football" , "jazz music" , "cinema" , "rock music" .
 
-:prism0
-      a       prissma:Prism ;
-      fresnel:purpose :ctx0 .
+:env2
+      a       prissma:Environment ;
+      prissma:nearbyEntity <http://john.example.org> .
+
